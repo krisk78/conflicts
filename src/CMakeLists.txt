@@ -1,13 +1,20 @@
-set(${PROJECT_NAME}_LINK_LIBS "")
+set(${PROJECT_NAME}_LINK_PUBLIC_LIBS "")
+set(${PROJECT_NAME}_LINK_INTERFACE_LIBS "")
 
 foreach(_DEP_LIB ${${PROJECT_NAME}_DEPENDENCIES})
     find_package(${_DEP_LIB} CONFIG REQUIRED)
-    list(APPEND ${PROJECT_NAME}_LINK_LIBS ${_DEP_LIB}::${_DEP_LIB})
+    list(APPEND ${PROJECT_NAME}_LINK_PUBLIC_LIBS ${_DEP_LIB}::${_DEP_LIB})
+endforeach()
+
+foreach(_DEP_LIB ${${PROJECT_NAME}_INTERFACES})
+    find_package(${_DEP_LIB} CONFIG REQUIRED)
+    list(APPEND ${PROJECT_NAME}_LINK_INTERFACE_LIBS ${_DEP_LIB}::${_DEP_LIB})
 endforeach()
 
 add_library(${PROJECT_NAME} INTERFACE)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${${PROJECT_NAME}_LINK_LIBS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${${PROJECT_NAME}_LINK_PUBLIC_LIBS})
+target_link_libraries(${PROJECT_NAME} INTERFACE ${${PROJECT_NAME}_LINK_INTERFACE_LIBS})
 
 target_include_directories(${PROJECT_NAME} 
     INTERFACE 
@@ -33,7 +40,7 @@ install(EXPORT ${PROJECT_NAME}_targets
 )
 
 # Generate the config file
-if("${${PROJECT_NAME}_DEPENDENCIES}" STREQUAL "")
+if("${${PROJECT_NAME}_DEPENDENCIES}" STREQUAL "" AND "${PROJECT_NAME}_INTERFACES" STREQUAL "")
     file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
         "include(\"\${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-targets.cmake\")\n"
     )
@@ -42,6 +49,11 @@ else()
         "include(CMakeFindDependencyMacro)\n"
     )
     foreach(_DEPENDENCY ${${PROJECT_NAME}_DEPENDENCIES})
+        file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+            "find_dependency(${_DEPENDENCY} CONFIG REQUIRED)\n"
+        )
+    endforeach()
+    foreach(_DEPENDENCY ${${PROJECT_NAME}_INTERFACES})
         file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
             "find_dependency(${_DEPENDENCY} CONFIG REQUIRED)\n"
         )

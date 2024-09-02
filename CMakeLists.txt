@@ -10,7 +10,8 @@ endif()
 
 # Set project name
 set(PROJECT_NAME "conflicts")
-set(${PROJECT_NAME}_DEPENDENCIES "requirements")
+set(${PROJECT_NAME}_DEPENDENCIES "")
+set(${PROJECT_NAME}_INTERFACES "requirements")
 
 # Option for building tests
 option(${PROJECT_NAME}_BUILD_TESTS "Build tests" OFF)

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <conflicts/conflicts.hpp>
+#include <conflicts.hpp>
 
 enum NiceGuys
 {
