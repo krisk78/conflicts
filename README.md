@@ -12,7 +12,7 @@ Rules:
 ### Conflicts()
 Instantiate a Conflicts object without cascading
 ### Conflicts(const bool cascading_mode)
-Instantiate a Conflicts object with the given cascading mode
+Instantiate a Conflicts object using the given cascading mode
 
 ## Information
 
