@@ -1,6 +1,6 @@
 # conflicts header-only library
 Implements the class Conflicts<br>
-The class Conflicts provide a specialized container that lists bidirectional conflict relationship between objects<br>
+The class Conflicts provides a specialized container that lists bidirectional conflict relationship between objects<br>
 Rules:
 * Create a relationship with the object itself is not allowed
 * Doubles are not allowed, each relationship is unique
