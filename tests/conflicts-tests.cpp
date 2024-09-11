@@ -27,9 +27,9 @@ protected:
 
 	// void TearDown() override {}
 
-	Conflicts<NiceGuys> con0;
-	Conflicts<NiceGuys> con1;
-	Conflicts<NiceGuys> con2{ true };		// cascading on
+	Conflicts::Conflicts<NiceGuys> con0;
+	Conflicts::Conflicts<NiceGuys> con1;
+	Conflicts::Conflicts<NiceGuys> con2{ true };		// cascading on
 };
 
 using ConflictsDeathTest = ConflictsTest;
@@ -94,10 +94,4 @@ TEST_F(ConflictsTest, Clear)
 	EXPECT_EQ(con0.size(), 0);
 	EXPECT_EQ(con1.size(), 0);
 	EXPECT_TRUE(con1.empty());
-}
-
-int main(int argc, char** argv)
-{
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }

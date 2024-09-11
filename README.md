@@ -1,19 +1,7 @@
 # conflicts header-only library
-Implements the class Conflicts<br>
-The class Conflicts provides a specialized container that lists bidirectional conflict relationship between objects<br>
-Rules:
-* Create a relationship with the object itself is not allowed
-* Doubles are not allowed, each relationship is unique
-* Supports 2 distinct immutable modes at instantiation:
-  + without cascading: only direct relationships are considered
-  + with cascading: evaluation of relationships is done recursively (if A is in conflict with B that is in conflict with C then A is in conflict with C)
- 
-## Constructor
-### Conflicts()
-Instantiate a Conflicts object without cascading
-### Conflicts(const bool cascading_mode)
-Instantiate a Conflicts object using the given cascading mode
 
-## Information
+This library provides a framework to handle conflicts between objects.
 
-## CRUD methods
+To implement it in your project, install the [overlay port conflicts](https://github.com/krisk78/overlay-ports/tree/61cd2b103ca91bc03d7903adcef837260e348dfc/conflicts) and use vcpkg. Set your path to overlay ports in vcpkg-configuration.json ("overlay-ports": [ "your_path_to_overlay_ports" ]).
+
+Full documentation of the class at <a href="https://krisk78.github.io/conflicts/html/index.html" target="_blank">doxygen documentation</a>.
