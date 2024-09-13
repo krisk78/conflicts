@@ -67,7 +67,7 @@ namespace Conflicts
         void merge(const std::unordered_multimap<T, T>& conflicts);
 
     private:
-        requirements::Requirements<T> m_conflicts{ false };
+        Requirements::Requirements<T> m_conflicts{ false };
         bool m_cascading{ false };
         // if cascading is on, an object in conflict with another object is in conflict with all objects in relation with this object
 
